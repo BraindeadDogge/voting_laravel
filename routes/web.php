@@ -13,13 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/test', function() {
-    $params = [
-        "name" => "Evgeniy"
-    ];
+Route::get('/', 'VoteController@showAll');
 
-    return view('test', $params);
+Route::get('/vote/create', function() {
+    return view('create_vote');
 });
+
+Route::post('/vote/create', 'VoteController@create');
+
+Route::get('/vote/show/{id}', 'VoteController@showCurrent');
+
+Route::get('/vote/positive_inc/{id}', 'VoteController@increasePositive');
+Route::get('/vote/negative_inc/{id}', 'VoteController@increaseNegative');
